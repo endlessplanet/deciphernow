@@ -10,6 +10,7 @@ docker \
     --env KNOWN_HOSTS="$(cat ${HOME}/.ssh/known_hosts)" \
     --env LDAP_USERNAME="emory.merryman" \
     --env LDAP_EMAIL="emory.merryman@deciphernow.com" \
+    --volume /var/run/docker.sock:/var/run/docker.sock:ro \
     endlessplanet/deciphernow &&
     docker container start --interactive $(cat ${PWD}/cidfile) &&
     docker container stop $(cat ${PWD}/cidfile) &&
