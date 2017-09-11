@@ -10,6 +10,7 @@ cleanup(){
         --cidfile ${PWD}/cidfile \
         --interactive \
         --tty \
+        --env DISPLAY \
         --env ID_RSA="$(cat ${HOME}/.ssh/id_rsa)" \
         --env KNOWN_HOSTS="$(cat ${HOME}/.ssh/known_hosts)" \
         --env LDAP_USERNAME="emory.merryman" \
