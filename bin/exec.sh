@@ -11,6 +11,7 @@ docker \
     --env LDAP_USERNAME="emory.merryman" \
     --env LDAP_EMAIL="emory.merryman@deciphernow.com" \
     --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+    --user root \
     endlessplanet/deciphernow &&
     docker container start --interactive $(cat ${PWD}/cidfile) &&
     docker container stop $(cat ${PWD}/cidfile) &&
