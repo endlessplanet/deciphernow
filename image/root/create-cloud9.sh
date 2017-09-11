@@ -36,4 +36,4 @@ GROUP_NAME=${1} &&
 		--volume /var/run/docker.sock:/var/run/docker.sock:ro \
 		--volume $(cat ${HOME}/docker/volumes/workspace):/workspace \
 		endlessplanet/cloud9 &&
-	docker network connect --alias ${PROJECT_NAME} $(cat ${HOME}/docker/networks/default) $(cat ${HOME}/docker/containers/${PROJECT_NAME}) &&
+	docker network connect --alias ${PROJECT_NAME} $(cat ${HOME}/docker/networks/default) $(cat ${HOME}/docker/containers/${PROJECT_NAME})
