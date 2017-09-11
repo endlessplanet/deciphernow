@@ -26,7 +26,7 @@ GROUP_NAME=${1} &&
     docker \
         inspect \
         --format "{{ range .Mounts }}{{ if eq .Destination \"/workspace\" }}{{ .Name }}{{ end }}{{ end }}" \
-        $(cat ${HOME}/docker/containers/shell) > ${HOME}/docker/volumes/workspace &&
+        $(cat ${SHELL_CIDFILE}) > ${HOME}/docker/volumes/workspace &&
     docker \
 		container \
 		create \
