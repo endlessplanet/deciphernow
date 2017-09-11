@@ -3,7 +3,7 @@
 PROJECT_NAME=${1} &&
     docker \
         container \
-        start 
+        start \
         $(docker inspect --format "{{ index .Config.Env 0 }}" $(cat ${HOME}/docker/containers/${PROJECT_NAME}) | cut -f 2 -d "=") &&
     docker \
         container \
