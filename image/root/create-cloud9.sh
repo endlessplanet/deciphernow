@@ -22,7 +22,7 @@ GROUP_NAME=${1} &&
 		--env DISPLAY="${DISPLAY}" \
 		--volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
 		endlessplanet/shell &&
-	docker network connect $(cat ${HOME}/docker/networks/default) $(cat ${HOME}/docker/containers/shell) &&
+	docker network connect $(cat ${HOME}/docker/networks/default) $(cat ${SHELL_CIDFILE}) &&
     docker \
         inspect \
         --format "{{ range .Mounts }}{{ if eq .Destination \"/workspace\" }}{{ .Name }}{{ end }}{{ end }}" \
