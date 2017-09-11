@@ -6,7 +6,7 @@ GROUP_NAME=${1} &&
     export ORIGIN=ssh://git@gitlab.363-283.io:2252/${LDAP_USERNAME}/${PROJECT_NAME}.git
     export UPSTREAM=ssh://git@gitlab.363-283.io:2252/${GROUP_NAME}/${PROJECT_NAME}.git
     export REPORT=ssh://git@gitlab.363-283.io:2252/${GROUP_NAME}/${PROJECT_NAME}.git
-    rm SHELL_CIDFILE &&
+    rm -f ${SHELL_CIDFILE} &&
 	docker \
 		container \
 		create \
