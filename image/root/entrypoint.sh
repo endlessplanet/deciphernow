@@ -13,7 +13,7 @@ cleanup(){
 		--privileged \
 		--tty \
 		--shm-size 256m \
-		--env DISPLAY \
+		--env DISPLAY="${DISPLAY}" \
 		--env TARGETUID=1000 \
 		--env XDG_RUNTIME_DIR=/run/user/1000 \
 		--volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
@@ -34,5 +34,7 @@ cleanup(){
 		--cidfile ${HOME}/docker/containers/sshd \
 		endlessplanet/sshd &&
 	docker network connect --alias sshd $(cat ${HOME}/docker/networks/default) $(cat ${HOME}/docker/containers/sshd) &&
-    sh /opt/docker/create-cloud9.sh cte object-drive-ui&&
+    sh /opt/docker/create-cloud9.sh cte object-drive-ui &&
+    docker container start $(cat ${HOME}/docker/containers/chromium) &&
+    docker container start $(cat ${HOME}/docker/containers/sshd) &&
     bash
