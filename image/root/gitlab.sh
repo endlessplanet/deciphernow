@@ -26,11 +26,11 @@ PUBLIC_KEY_FILE=$(mktemp) &&
     SSHD_PORT=$(((${RANDOM}%10000)+10000)) &&
     sleep 10 &&
     echo 00100 &&
-    sudo docker container exec $(cat ${CLOUD9_CIDFILE}) ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd &&
+    sudo docker container exec --detach $(cat ${CLOUD9_CIDFILE}) ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd &&
     echo 00200 &&
-    sudo docker container exec $(cat ${CLOUD9_CIDFILE}) ssh -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd &&
+    sudo docker container exec --detach $(cat ${CLOUD9_CIDFILE}) ssh -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd &&
     echo 00300 &&
-    sudo docker container exec $(cat ${CLOUD9_CIDFILE}) apt-get install git &&
+    sudo docker container exec --detach $(cat ${CLOUD9_CIDFILE}) apt-get install git &&
     echo 00400 &&
     # sudo docker container exec $(cat ${CLOUD9_CIDFILE}) ssh sshd &&
     true
