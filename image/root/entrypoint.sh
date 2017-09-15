@@ -13,5 +13,6 @@ cleanup() {
     docker image pull rastasheep/ubuntu-sshd:16.04 &&
     mkdir ${HOME}/docker &&
     mkdir ${HOME}/docker/containers &&
-    docker container create --cidfile ${HOME}/docker/containers rastasheep/ubuntu-sshd:16.04 &&
+    docker container create --cidfile ${HOME}/docker/containers/sshd rastasheep/ubuntu-sshd:16.04 &&
+    docker container start $(cat ${HOME}/docker/containers/sshd)
     bash

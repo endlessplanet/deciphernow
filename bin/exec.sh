@@ -11,6 +11,7 @@ cleanup(){
     docker \
         container \
         create \
+        --cidfile cidfile \
         --interactive \
         --tty \
         --env NETWORK="${1}" \
