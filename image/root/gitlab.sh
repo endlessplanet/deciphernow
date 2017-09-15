@@ -18,7 +18,7 @@ ADVENTURE_NAME="${1}" &&
     sudo docker network connect --alias ${ADVENTURE_NAME} ${NETWORK} $(cat ${CLOUD9_CIDFILE}) &&
 #    sudo docker container start ${SHELL_CIDFILE} &&
     sudo docker container start $(cat ${CLOUD9_CIDFILE}) &&
-    sudo docker container exec --interactive --tty ${CLOUD9_CIDFILE} cat /root/.ssh/id_rsa | sudo docker container exec --interactive $(cat ${HOME}/docker/containers/) sh /opt/docker/reserve-ports.sh > ${HOME}/docker/ports/${ADVENTURE_NAME} &&
+    sudo docker container exec --interactive --tty ${CLOUD9_CIDFILE} cat /root/.ssh/id_rsa | sudo docker container exec --interactive $(cat ${HOME}/docker/containers/sshd) sh /opt/docker/reserve-ports.sh > ${HOME}/docker/ports/${ADVENTURE_NAME} &&
     sudo docker container exec --detach $(cat ${CLOUD9_CIDFILE}) ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd &&
     sudo docker container exec --detach $(cat ${CLOUD9_CIDFILE}) ssh -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd &&
     # sudo docker container exec $(cat ${CLOUD9_CIDFILE}) ssh sshd &&
