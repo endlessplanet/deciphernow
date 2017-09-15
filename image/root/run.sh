@@ -7,7 +7,7 @@ dnf update --assumeyes &&
     dnf install --assumeyes docker-common docker-latest &&
     dnf update --assumeyes &&
     adduser user &&
-    dnf install --assumeyes sudo &&
+    dnf install --assumeyes sudo openssh-clients &&
     cp /opt/docker/user.sudo /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
     dnf update --assumeyes &&
