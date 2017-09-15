@@ -14,7 +14,7 @@ ADVENTURE_NAME="${1}" &&
         --env SSHD_CONTAINER=$(cat ${HOME}/docker/containers/sshd) \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --volume $(cat ${HOME}/docker/volumes/workspace-${ADVENTURE_NAME}):/workspace/${ADVENTURE_NAME} \
-        endlessplanet/cloud9:042c2d9154677a343c5e4a971b3f67364d0d0dac &&
+        endlessplanet/cloud9:dbd265b9afb139e84a51b26bcf0004aa2dfa6051 &&
     sudo docker network connect --alias ${ADVENTURE_NAME} ${NETWORK} $(cat ${CLOUD9_CIDFILE}) &&
     sudo docker container start $(cat ${CLOUD9_CIDFILE}) &&
     # sudo docker container exec $(cat ${CLOUD9_CIDFILE}) ssh sshd &&
