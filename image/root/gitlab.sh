@@ -21,7 +21,7 @@ PUBLIC_KEY_FILE=$(mktemp) &&
     sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) apt-get install --assume-yes openssh-client &&
     sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) ssh-keygen -f /root/.ssh/id_rsa -P "" &&
     sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) cat /root/.ssh/id_rsa.pub | sudo docker container exec --interactive $(cat ${HOME}/docker/containers/sshd) tee --append /root/.ssh/authorized_keys &&
-    sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) ssh-keyscan sshd | sudo docker container exec --interactive ${CLOUD9_CIDFILE)} tee /root/.ssh/known_hosts &&
+    sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) ssh-keyscan sshd | sudo docker container exec --interactive $(cat ${CLOUD9_CIDFILE}) tee /root/.ssh/known_hosts &&
     sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) chmod 0600 /root/.ssh/known_hosts &&
     SSHD_PORT=$(((${RANDOM}%10000)+10000)) &&
     sudo docker container exec $(cat ${CLOUD9_CIDFILE}) ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd &&
