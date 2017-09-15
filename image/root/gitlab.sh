@@ -24,6 +24,7 @@ PUBLIC_KEY_FILE=$(mktemp) &&
     sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) ssh-keyscan sshd | sudo docker container exec --interactive $(cat ${CLOUD9_CIDFILE}) tee /root/.ssh/known_hosts &&
     sudo docker container exec --interactive --tty $(cat ${CLOUD9_CIDFILE}) chmod 0600 /root/.ssh/known_hosts &&
     SSHD_PORT=$(((${RANDOM}%10000)+10000)) &&
+    sleep 10 &&
     echo 00100 &&
     sudo docker container exec $(cat ${CLOUD9_CIDFILE}) ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd &&
     echo 00200 &&
