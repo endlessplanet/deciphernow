@@ -17,5 +17,9 @@ cleanup() {
     mkdir ${HOME}/docker/containers &&
     sudo docker container create --cidfile ${HOME}/docker/containers/sshd rastasheep/ubuntu-sshd:16.04 &&
     sudo docker network connect --alias sshd ${NETWORK} $(cat ${HOME}/docker/containers/sshd) &&
-    sudo docker container start $(cat ${HOME}/docker/containers/sshd)
+    sudo docker container start $(cat ${HOME}/docker/containers/sshd) &&
+    sudo docker container exec --interactive --tty $(cat ${HOME}/docker/containers/sshd) mkdir /root/.ssh &&
+    sudo docker container exec --interactive --tty $(cat ${HOME}/docker/containers/sshd) chmod 0700 /root/.ssh &&
+    sudo docker container exec --interactive --tty $(cat ${HOME}/docker/containers/sshd) touch /root/.ssh/authorized_keys &&
+    sudo docker container exec --interactive --tty $(cat ${HOME}/docker/containers/sshd) chmod 0600 /root/.ssh/authorized_keys &&
     bash
