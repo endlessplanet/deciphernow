@@ -13,7 +13,7 @@ ADVENTURE_NAME="${1}" &&
         --env DISPLAY \
         --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
         --volume $(cat ${HOME}/docker/volumes/workspace-${ADVENTURE_NAME}):/workspace/${ADVENTURE_NAME} \
-        endlessplanet/shell:021b111fc183d930d9c42eb0b9e9b84bcec1f0b6 \
+        endlessplanet/shell:37517fbdf6c6782288fa256705a6898a8bf78d6d \
         sleep infinite &&
     sudo \
         docker \
