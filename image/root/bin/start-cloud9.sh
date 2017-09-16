@@ -11,10 +11,9 @@ ADVENTURE_NAME="${1}" &&
         create \
         --cidfile ${SHELL_CIDFILE} \
         --env DISPLAY \
-        --env PROJECT_NAME=${ADVENTURE_NAME} \
         --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
         --volume $(cat ${HOME}/docker/volumes/workspace-${ADVENTURE_NAME}):/workspace/${ADVENTURE_NAME} \
-        endlessplanet/shell:a8b5760957e9f2f4ef25002b8b0861f63ac800bc \
+        endlessplanet/shell:bdad096432bbf2bb952c07fabdbd8ad5464a686c \
         sleep infinite &&
     sudo \
         docker \
