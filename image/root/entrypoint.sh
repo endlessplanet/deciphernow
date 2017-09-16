@@ -17,7 +17,7 @@ cleanup() {
     sudo docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASSWORD} &&
     sudo docker image pull endlessplanet/sshd:ca675205de9d945aac60f35885ae75a71f9de123 &&
     sudo docker image pull fedora:26 &&
-    sudo docker image pull endlessplanet/cloud9:48144427ff98cf353e5bbd8a9b99f2f1cfbfdf58 &&
+    sudo docker image pull endlessplanet/cloud9:bfd67127f0b16bb9be91a4c825354bb8ceb40ee4 &&
     mkdir ${HOME}/docker &&
     mkdir ${HOME}/docker/containers &&
     mkdir ${HOME}/docker/volumes &&
