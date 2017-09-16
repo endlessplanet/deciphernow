@@ -24,7 +24,7 @@ ADVENTURE_NAME="${1}" &&
         --env SHELL_CONTAINER=$(cat ${SHELL_CIDFILE}) \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --volume $(cat ${HOME}/docker/volumes/workspace-${ADVENTURE_NAME}):/workspace/${ADVENTURE_NAME} \
-        endlessplanet/cloud9:8226d4f07ed544fe3556d3df6c91f98d04c0b0fd &&
+        endlessplanet/cloud9:bb1940e97dfb57d78d3f12587498202ae79d5657 &&
     sudo docker network connect ${NETWORK} $(cat ${SHELL_CIDFILE}) &&
     sudo docker network connect --alias ${ADVENTURE_NAME} ${NETWORK} $(cat ${CLOUD9_CIDFILE}) &&
     sudo docker container start $(cat ${SHELL_CIDFILE}) &&
