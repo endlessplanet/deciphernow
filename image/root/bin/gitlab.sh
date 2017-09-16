@@ -4,7 +4,7 @@ ADVENTURE_NAME="${1}" &&
     ORGANIZATION="${2}" &&
     REPOSITORY="${3}" &&
     SHELL_CIDFILE=$(mktemp ${HOME}/docker/containers/shell-${ADVENTURE_NAME}-XXXXXXXX) &&
-    gitlab "${ADVENTURE_NAME}" "${SHELL_CIDFILE}" &&
+    start-cloud9 "${ADVENTURE_NAME}" "${SHELL_CIDFILE}" &&
     echo ${ORIGIN_ID_RSA} | docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/origin_id_rsa &&
     docker container exec --interactive --tty $(cat ${SHELL_CIDFILE}) chmod 0600 /home/user/.ssh/origin_id_rsa &&
     echo ${UPSTREAM_ID_RSA} | docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/upstream_id_rsa &&
