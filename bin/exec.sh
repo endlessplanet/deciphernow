@@ -18,6 +18,11 @@ cleanup(){
         --env DISPLAY \
         --env DOCKERHUB_USERNAME \
         --env DOCKERHUB_PASSWORD \
+        --env LDAP_USERNAME \
+        --env LDAP_EMAIL \
+        --env ORIGIN_ID_RSA="$(cat ~/.ssh/origin_id_rsa)" \
+        --env UPSTREAM_ID_RSA="$(cat ~/.ssh/upstream_id_rsa)" \
+        --env REPORT_ID_RSA="$(cat ~/.ssh/report_id_rsa)" \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         endlessplanet/deciphernow:$(git rev-parse --verify HEAD) &&
     docker container start --interactive $(cat cidfile)

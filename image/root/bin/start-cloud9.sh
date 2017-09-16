@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ADVENTURE_NAME="${1}" &&
-    SHELL_CIDFILE=$(mktemp ${HOME}/docker/containers/shell-${ADVENTURE_NAME}-XXXXXXXX) &&
+    SHELL_CIDFILE="${2}" &&
     CLOUD9_CIDFILE=$(mktemp ${HOME}/docker/containers/cloud9-${ADVENTURE_NAME}-XXXXXXXX) &&
     rm --force ${SHELL_CIDFILE} ${CLOUD9_CIDFILE} &&
     sudo docker volume create > ${HOME}/docker/volumes/workspace-${ADVENTURE_NAME} &&

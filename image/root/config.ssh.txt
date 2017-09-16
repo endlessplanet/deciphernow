@@ -1,0 +1,18 @@
+Host origin
+User
+HostName gitlab.363-283.io
+Port 2252
+IdentityFile ~/.ssh/origin_id_rsa
+
+Host upstream
+User
+HostName gitlab.363-283.io
+Port 2252
+IdentityFile ~/.ssh/upstream_id_rsa
+
+Host report
+User
+HostName gitlab.363-283.io
+Port 2252
+IdentityFile ~/.ssh/report_id_rsa
+
