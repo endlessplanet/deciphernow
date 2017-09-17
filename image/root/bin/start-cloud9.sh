@@ -14,7 +14,7 @@ ADVENTURE_NAME="${1}" &&
         --env MASTER_BRANCH=develop \
         --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
         --volume $(cat ${HOME}/docker/volumes/workspace-${ADVENTURE_NAME}):/workspace/${ADVENTURE_NAME} \
-        endlessplanet/shell:ac3cfe683c83e5d65bbfab77d838e9e7db659c86 \
+        endlessplanet/shell:b110d49f662e19b2735417c3e280a4e3195c8d0a \
         sleep infinite &&
     sudo \
         docker \
