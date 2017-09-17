@@ -26,5 +26,8 @@ cleanup() {
     sudo docker network connect --alias sshd ${NETWORK} $(cat ${HOME}/docker/containers/sshd) &&
     sudo docker container start $(cat ${HOME}/docker/containers/sshd) &&
     gitlab object-drive-ui cte object-drive-ui &&
-    gitlab salt-stack chimera salt-stack &&
+    gitlab saltstack chimera saltstack &&
+    gitlab notification-manager chimera notification-manager &&
+    gitlab notification-engine chimera notification-engine &&
+    gitlab notification-service chimera notification-service &&
     bash
