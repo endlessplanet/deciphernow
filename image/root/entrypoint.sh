@@ -16,7 +16,7 @@ cleanup() {
     trap cleanup EXIT &&
     sudo docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASSWORD} &&
     sudo docker image pull endlessplanet/sshd:ca675205de9d945aac60f35885ae75a71f9de123 &&
-    sudo docker image pull endlessplanet/shell:30a08e2f14fee1cb9c51d3fdfea7a4eca0aa1119 &&
+    sudo docker image pull endlessplanet/shell:ac3cfe683c83e5d65bbfab77d838e9e7db659c86 &&
     sudo docker image pull endlessplanet/cloud9:44bdeb0620f3b29849d3e2b0b8ded5d696ac93fe &&
     mkdir ${HOME}/docker &&
     mkdir ${HOME}/docker/containers &&
