@@ -25,4 +25,6 @@ cleanup() {
     sudo docker container create --cidfile ${HOME}/docker/containers/sshd endlessplanet/sshd:ca675205de9d945aac60f35885ae75a71f9de123 &&
     sudo docker network connect --alias sshd ${NETWORK} $(cat ${HOME}/docker/containers/sshd) &&
     sudo docker container start $(cat ${HOME}/docker/containers/sshd) &&
+    gitlab object-drive-ui cte object-drive-ui &&
+    gitlab salt-stack chimera salt-stack &&
     bash

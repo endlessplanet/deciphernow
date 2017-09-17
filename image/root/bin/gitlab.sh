@@ -24,10 +24,10 @@ ADVENTURE_NAME="${1}" &&
             /home/user/.ssh/report_id_rsa \
             /home/user/.ssh/known_hosts &&
     sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} init &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add origin ssh://origin/${LDAP_USERNAME}/notification-engine.git &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add upstream ssh://origin/${ORGANIZATION}/${REPOSITORY}.git &&
+    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add origin ssh://origin/${LDAP_USERNAME}/${REPOSITORY}.git &&
+    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add upstream ssh://upstream/${ORGANIZATION}/${REPOSITORY}.git &&
     sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote set-url --push upstream no_push &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add report ssh://origin/${ORGNAIZATION}/${REPOSITORY}.git &&
+    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add report ssh://report/${ORGANIZATION}/${REPOSITORY}.git &&
     sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} config user.name "${LDAP_USERNAME}" &&
     sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} config user.email "${LDAP_EMAIL}"
     
