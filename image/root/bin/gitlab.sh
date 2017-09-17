@@ -5,7 +5,7 @@ ADVENTURE_NAME="${1}" &&
     REPOSITORY="${3}" &&
     SHELL_CIDFILE=$(mktemp ${HOME}/docker/containers/shell-${ADVENTURE_NAME}-XXXXXXXX) &&
     start-cloud9 "${ADVENTURE_NAME}" "${SHELL_CIDFILE}" &&
-    echo "${ORIGIN_ID_RSA}" | docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/origin_id_rsa &&
+    echo "${ORIGIN_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/origin_id_rsa &&
     echo "${UPSTREAM_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/upstream_id_rsa &&
     echo "${REPORT_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/report_id_rsa &&
     sudo docker container exec --interactive --tty $(cat ${SHELL_CIDFILE}) chmod 0600 /home/user/.ssh/report_id_rsa &&
