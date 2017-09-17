@@ -1,17 +1,17 @@
 Host origin
-User
+User git
 HostName gitlab.363-283.io
 Port 2252
 IdentityFile ~/.ssh/origin_id_rsa
 
 Host upstream
-User
+User git
 HostName gitlab.363-283.io
 Port 2252
 IdentityFile ~/.ssh/upstream_id_rsa
 
 Host report
-User
+User git
 HostName gitlab.363-283.io
 Port 2252
 IdentityFile ~/.ssh/report_id_rsa
