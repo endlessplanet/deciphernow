@@ -16,7 +16,7 @@ ADVENTURE_NAME="${1}" &&
         --env SHELL_CONTAINER=$(cat ${SHELL_CIDFILE}) \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --volume $(cat ${HOME}/docker/volumes/workspace-${ADVENTURE_NAME}):/workspace/${ADVENTURE_NAME} \
-        endlessplanet/cloud9:8d446e5b98f4ca4344877fa079df32a08415fd0b 
+        endlessplanet/cloud9:1773b5755cd4d557d460bb5253cf86b2fd8dabd8 
     start-cloud9 "${ADVENTURE_NAME}" "${SHELL_CIDFILE}" &&
     echo "${ORIGIN_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/origin_id_rsa &&
     echo "${UPSTREAM_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/upstream_id_rsa &&
