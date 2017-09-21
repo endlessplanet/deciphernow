@@ -29,5 +29,6 @@ ADVENTURE_NAME="${1}" &&
     sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote set-url --push upstream no_push &&
     sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add report ssh://report/${ORGANIZATION}/${REPOSITORY}.git &&
     sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} config user.name "${LDAP_USERNAME}" &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} config user.email "${LDAP_EMAIL}"
+    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} config user.email "${LDAP_EMAIL}" &&
+    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) ln --symbolic --force /home/user/bin/post-commit /workspace/${ADVENTURE_NAME}/.git/hooks
     
