@@ -18,4 +18,4 @@ CIDFILE=$(mktemp) &&
         --tty \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         endlessplanet/deciphernow:$(git rev-parse --verify HEAD) &&
-    docker container start --interactive $(cat cidfile)
+    docker container start --interactive $(cat ${CIDFILE})
