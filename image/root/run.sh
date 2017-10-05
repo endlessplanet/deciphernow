@@ -2,6 +2,7 @@
 
 apk update &&
     apk upgrade &&
+    apk add bash &&
     adduser -D user &&
     mkdir /home/user/docker &&
     mkdir /home/user/docker/containers &&
