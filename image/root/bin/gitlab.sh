@@ -1,34 +1,40 @@
 #!/bin/sh
 
-ADVENTURE_NAME="${1}" &&
-    ORGANIZATION="${2}" &&
-    REPOSITORY="${3}" &&
-    SHELL_CIDFILE=$(mktemp ${HOME}/docker/containers/shell-${ADVENTURE_NAME}-XXXXXXXX) &&
-    start-cloud9 "${ADVENTURE_NAME}" "${SHELL_CIDFILE}" &&
-    echo "${ORIGIN_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/origin_id_rsa &&
-    echo "${UPSTREAM_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/upstream_id_rsa &&
-    echo "${REPORT_ID_RSA}" | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/report_id_rsa &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) chmod 0600 /home/user/.ssh/report_id_rsa &&
-    sudo docker container cp /opt/docker/config.ssh.txt $(cat ${SHELL_CIDFILE}):/home/user/.ssh/config &&
-    ssh-keyscan gitlab.363-283.io | sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) tee /home/user/.ssh/known_hosts &&
-    sudo docker \
+ORGANIZATION="${1}" &&
+    REPOSITORY="${2}" &&
+    ADVENTURE="${3}" &&
+    CIDFILE=$(mktemp ${HOME}/docker/containers) &&
+    rm ${CIDFILE} &&
+    docker \
         container \
-        exec \
-        --interactive \
-        \
-        $(cat ${SHELL_CIDFILE}) \
-            chmod 0600 \
-            /home/user/.ssh/origin_id_rsa \
-            /home/user/.ssh/upstream_id_rsa \
-            /home/user/.ssh/report_id_rsa \
-            /home/user/.ssh/report_id_rsa \
-            /home/user/.ssh/known_hosts &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} init &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add origin ssh://origin/${LDAP_USERNAME}/${REPOSITORY}.git &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add upstream ssh://upstream/${ORGANIZATION}/${REPOSITORY}.git &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote set-url --push upstream no_push &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} remote add report ssh://report/${ORGANIZATION}/${REPOSITORY}.git &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} config user.name "${LDAP_USERNAME}" &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) git -C /workspace/${ADVENTURE_NAME} config user.email "${LDAP_EMAIL}" &&
-    sudo docker container exec --interactive $(cat ${SHELL_CIDFILE}) ln --symbolic --force /home/user/bin/post-commit /workspace/${ADVENTURE_NAME}/.git/hooks
+        create \
+        --cidfile ${CIDFILE} \
+        --env SSHD_CONTAINER=$(cat ${HOME}/docker/containers/sshd) \
+        --env ADVENTURE \
+        ${CLOUD9_IMAGE} &&
+    docker container start $(cat ${CIDFILE}) &&
+    echo "${ORIGIN_ID_RSA}" | docker container exec --interactive $(cat ${CIDFILE}) tee /home/user/.ssh/origin_id_rsa &&
+    echo "${UPSTREAM_ID_RSA}" | docker container exec --interactive $(cat ${CIDFILE}) tee /home/user/.ssh/upstream_id_rsa &&
+    echo "${REPORT_ID_RSA}" | docker container exec --interactive $(cat ${CIDFILE}) tee /home/user/.ssh/report_id_rsa &&
+    echo "${KNOWN_HOSTS}" | docker container exec --interactive $(cat ${CIDFILE}) tee /home/user/.ssh/report_id_rsa &&
+    docker container exec --interactive $(cat ${CIDFILE}) chmod 0600 /home/user/.ssh/origin_id_rsa /home/user/.ssh/upstream_id_rsa /home/user/.ssh/report_id_rsa &&
+    docker container exec --interactive $(cat ${CIDFILE}) chmod 0664 /home/user/.ssh/known_hosts &&
+    docker container cp /opt/docker/config.ssh.txt $(cat ${CIDFILE}):/home/user/.ssh/config &&
+    docker container exec --interactive $(cat ${CIDFILE}) mkdir /workspace/${ADVENTURE_NAME}/project /workspace/${ADVENTURE_NAME}/salt &&
+    docker container exec --interactive $(cat ${CIDFILE}) git -C /workspace/${ADVENTURE_NAME}/project init &&
+    docker container exec --interactive $(cat ${CIDFILE}) git -C /workspace/${ADVENTURE_NAME}/project remote add origin ssh://origin/${LDAP_USERNAME}/${REPOSITORY}.git &&
+    docker container exec --interactive $(cat ${CIDFILE}) git -C /workspace/${ADVENTURE_NAME}/project remote add upstream ssh://upstream/${ORGANIZATION}/${REPOSITORY}.git &&
+    docker container exec --interactive $(cat ${CIDFILE}) git -C /workspace/${ADVENTURE_NAME}/project remote set-url --push upstream no_push &&
+    docker container exec --interactive $(cat ${CIDFILE}) git -C /workspace/${ADVENTURE_NAME}/project remote add report ssh://report/${ORGANIZATION}/${REPOSITORY}.git &&
+    docker container exec --interactive $(cat ${CIDFILE}) git -C /workspace/${ADVENTURE_NAME}/project config user.name "${LDAP_USERNAME}" &&
+    docker container exec --interactive $(cat ${CIDFILE}) git -C /workspace/${ADVENTURE_NAME}/project config user.email "${LDAP_EMAIL}" &&
+    docker container exec --interactive $(cat ${CIDFILE}) ln --symbolic --force /home/user/bin/post-commit /workspace/${ADVENTURE_NAME}/project/.git/hooks &&
+    docker container exec --interactive $(cat ${CIDFIlE}) git -C /workspace/${ADVENTURE_NAME}/salt init &&
+    docker container exec --interactive $(cat ${CIDFIlE}) git -C /workspace/${ADVENTURE_NAME}/salt remote add origin ssh://origin/${LDAP_USERNAME}/${REPOSITORY}.git &&
+    docker container exec --interactive $(cat ${CIDFIlE}) git -C /workspace/${ADVENTURE_NAME}/salt remote add upstream ssh://upstream/${ORGANIZATION}/${REPOSITORY}.git &&
+    docker container exec --interactive $(cat ${CIDFIlE}) git -C /workspace/${ADVENTURE_NAME}/salt remote set-url --push upstream no_push &&
+    docker container exec --interactive $(cat ${CIDFIlE}) git -C /workspace/${ADVENTURE_NAME}/salt remote add report ssh://report/${ORGANIZATION}/${REPOSITORY}.git &&
+    docker container exec --interactive $(cat ${CIDFIlE}) git -C /workspace/${ADVENTURE_NAME}/salt config user.name "${LDAP_USERNAME}" &&
+    docker container exec --interactive $(cat ${CIDFIlE}) git -C /workspace/${ADVENTURE_NAME}/salt config user.email "${LDAP_EMAIL}" &&
+    docker container exec --interactive $(cat ${CIDFIlE}) ln --symbolic --force /home/user/bin/post-commit /workspace/${ADVENTURE_NAME}/salt/.git/hooks
     
