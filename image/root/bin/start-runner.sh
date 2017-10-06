@@ -1,30 +1,47 @@
 #!/bin/sh
 
 REGISTRATION_TOKEN=${1} &&
+    DIND=$(mktemp ${HOME}/docker/containers/dind-XXXXXXXX) &&
+    RUNN=$(mktemp ${HOME}/docker/containers/runner-XXXXXXXX) &&
+    NETW=$(mktemp ${HOME}/docker/networks/runner-XXXXXXXX) &&
     docker image pull docker:17.09.0-dind &&
     docker image pull gitlab/gitlab-runner:v1.11.2 &&
-    docker network create $(uuidgen) > ${HOME}/docker/networks/runner &&
+    docker network create $(uuidgen) > ${NETW} &&
+    rm -f ${DIND} ${RUNN}
     docker \
         container \
         create \
-        --cidfile ${HOME}/docker/containers/runner-dind \
+        --cidfile ${DIND} \
         --privileged \
         docker:17.09.0-dind \
             --host tcp://0.0.0.0:2376 &&
     docker \
         container \
         create \
-        --cidfile ${HOME}/docker/containers/runner \
+        --cidfile ${RUNN} \
         gitlab/gitlab-runner:v1.11.2 &&
-    docker network connect --alias dind $(cat ${HOME}/docker/networks/runner) $(cat ${HOME}/docker/containers/runner-dind) &&
-    docker network connect $(cat ${HOME}/docker/networks/runner) $(cat ${HOME}/docker/containers/runner) &&
-    docker container start $(cat ${HOME}/docker/containers/runner-dind) $(cat ${HOME}/docker/containers/runner) &&
+    docker \
+        network \
+        connect \
+        --alias dind \
+        $(cat {NETW}) \
+        $(cat ${DIND}) &&
+    docker \
+        network \
+        connect \
+        $(cat ${NETW}) \
+        $(cat ${RUNN}) &&
+    docker \
+        container \
+        start \
+        $(cat ${DIND}) \
+        $(cat ${RUNN}) &&
     docker \
         container \
         exec \
         --interactive \
         --tty \
-        $(cat ${HOME}/docker/containers/runner) \
+        $(cat ${RUNN}) \
         gitlab-runner \
             register \
             --non-interactive \

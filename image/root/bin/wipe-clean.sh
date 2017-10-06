@@ -1,6 +1,10 @@
 #!/bin/sh
 
-ls -1 ${HOME}/docker/containers | while read FILE
+ls -1 ${HOME}/docker/containers/runner-* | while read ${FILE}
+do
+    docker container exec --interactive --tty $(cat ${FILE}) unregister --name proprietary
+done &&
+    ls -1 ${HOME}/docker/containers | while read FILE
     do
         docker container stop $(cat ${HOME}/docker/containers/${FILE}) &&
             docker container rm --volumes $(cat ${HOME}/docker/containers/${FILE}) &&
