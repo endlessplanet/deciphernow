@@ -1,19 +1,9 @@
 #!/bin/sh
 
-bash 
-# cleanup() {
-#     ls -1 ${HOME}/docker/containers | while read FILE
-#     do
-#         docker container stop $(cat ${HOME}/docker/containers/${FILE}) &&
-#             docker container rm --volumes $(cat ${HOME}/docker/containers/${FILE}) &&
-#             rm --force ${HOME}/docker/containers/${FILE}
-#     done &&
-#     ls -1 ${HOME}/docker/volumes | while read FILE
-#     do
-#         sudo docker volume rm $(cat ${HOME}/docker/volumes/${FILE}) &&
-#             rm --force ${HOME}/docker/volumes/${FILE}
-#     done
-# } &&
+export PATH=${HOME}/bin:${PATH}
+    trap wipe-clean EXIT &&
+    docker network create $(uuidgen) > ${HOME}/docker/networks/default &&
+    bash
 #     trap cleanup EXIT &&
 #     sudo docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASSWORD} &&
 #     sudo docker image pull ${SSHD_IMAGE} &&
