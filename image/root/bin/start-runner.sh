@@ -16,7 +16,7 @@ REGISTRATION_TOKEN=${1} &&
         create \
         --cidfile ${HOME}/docker/containers/runner \
         gitlab/gitlab-runner:v1.11.2 &&
-    docker network connect --alias dind $(cat ${HOME}/docker/networks/runner) $(cat ${HOME}/docker/containers/runner-dind-1) &&
+    docker network connect --alias dind $(cat ${HOME}/docker/networks/runner) $(cat ${HOME}/docker/containers/runner-dind) &&
     docker network connect $(cat ${HOME}/docker/networks/runner) $(cat ${HOME}/docker/containers/runner) &&
     docker container start $(cat ${HOME}/docker/containers/runner-dind) $(cat ${HOME}/docker/containers/runner) &&
     docker \
