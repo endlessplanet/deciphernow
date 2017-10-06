@@ -11,6 +11,7 @@ export PATH=${HOME}/bin:${PATH}
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         gitlab/gitlab-runner:v1.11.2 &&
     docker container start $(cat ${HOME}/docker/containers/gitlab-runner) &&
+    start-runner XB5zjxVpyxv3pXCwyumo &&
     bash
 #     trap cleanup EXIT &&
 #     sudo docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASSWORD} &&
