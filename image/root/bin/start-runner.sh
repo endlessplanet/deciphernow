@@ -11,7 +11,7 @@ docker \
         --non-interactive \
         --registration-token "${1}" \
         --run-untagged \
-        --name "$(uuidgen)" \
+        --name "$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)" \
         --limit 1 \
         --url https://gitlab.363-283.io/ci \
         --executor docker \
