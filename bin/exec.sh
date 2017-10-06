@@ -27,10 +27,10 @@ NETW=$(mktemp) &&
         --cidfile ${WORK} \
         --interactive \
         --tty \
-        --env DOCKER_HOST=tcp://docker:2376
+        --env DOCKER_HOST=tcp://docker:2376 \
         endlessplanet/deciphernow:$(git rev-parse --verify HEAD) &&
     docker network create $(uuidgen) > ${NETW} &&
-    docker network connect --alias docker $(cat ${NETW}) $(cat ${DIND}) &&
+    docker networsk connect --alias docker $(cat ${NETW}) $(cat ${DIND}) &&
     docker network connect $(cat ${WORK}) $(cat ${DIND}) &&
     docker container start $(cat ${DIND}) &&
     docker container start --interactive $(cat ${WORK})
