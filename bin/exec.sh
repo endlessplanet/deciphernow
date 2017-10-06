@@ -1,13 +1,13 @@
 #!/bin/sh
 
-NETW=$(mktemp) &&
+NET=$(mktemp) &&
     DIND=$(mktemp) &&
     WORK=$(mktemp) &&
     cleanup(){
         docker container stop $(cat ${DIND}) $(cat ${WORK}) &&
             docker container rm --volumes $(cat ${DIND}) $(cat ${WORK}) &&
-            docker network rm $(cat ${NETW}) &&
-            rm -f ${DIND} ${WORK} ${NETW}
+            docker network rm $(cat ${NET}) &&
+            rm -f ${DIND} ${WORK} ${NET}
     } &&
     trap cleanup EXIT &&
     rm -f ${DIND} ${WORK} &&
@@ -19,6 +19,7 @@ NETW=$(mktemp) &&
         create \
         --cidfile ${DIND} \
         --privileged \
+        --volume /tmp/.X11-unix:/var/opt/.X11-unix:ro \
         docker:17.09.0-dind \
             --host tcp://0.0.0.0:2376 &&
     docker \
@@ -29,8 +30,8 @@ NETW=$(mktemp) &&
         --tty \
         --env DOCKER_HOST=tcp://docker:2376 \
         endlessplanet/deciphernow:$(git rev-parse --verify HEAD) &&
-    docker network create $(uuidgen) > ${NETW} &&
-    docker network connect --alias docker $(cat ${NETW}) $(cat ${DIND}) &&
-    docker network connect $(cat ${NETW}) $(cat ${WORK}) &&
+    docker network create $(uuidgen) > ${NET} &&
+    docker network connect --alias docker $(cat ${NET}) $(cat ${DIND}) &&
+    docker network connect $(cat ${NET}) $(cat ${WORK}) &&
     docker container start $(cat ${DIND}) &&
     docker container start --interactive $(cat ${WORK})
