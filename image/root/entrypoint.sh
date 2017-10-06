@@ -2,7 +2,6 @@
 
 export PATH=${HOME}/bin:${PATH}
     trap wipe-clean EXIT &&
-    docker network create $(uuidgen) > ${HOME}/docker/networks/default &&
     bash
 #     trap cleanup EXIT &&
 #     sudo docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASSWORD} &&
