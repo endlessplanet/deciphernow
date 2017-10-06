@@ -5,7 +5,7 @@
     cat ${HOME}/runners.out.txt &&
     echo ERROR &&
     cat ${HOME}/runners.err.txt &&
-    tail -n -1 ${HOME}/runners.err.txt | cut -f 1 -d " " | while read RUNNER
+    tail -n -1 ${HOME}/runners.out.txt | cut -f 1 -d " " | while read RUNNER
     do
         echo docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner unregister --name ${RUNNER} &&
             docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner unregister --name ${RUNNER}
