@@ -18,7 +18,7 @@ NETW=$(mktemp) &&
         container \
         create \
         --cidfile ${DIND} \
-        --privileged
+        --privileged \
         docker:17.09.0-dind \
             --host tcp://0.0.0.0:2376 &&
     docker \
