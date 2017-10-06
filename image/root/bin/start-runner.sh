@@ -11,7 +11,7 @@ docker \
         --non-interactive \
         --registration-token "${1}" \
         --run-untagged \
-        --name "${2}" \
+        --name "$(uuidgen)" \
         --limit 1 \
         --url https://gitlab.363-283.io/ci \
         --executor docker \
