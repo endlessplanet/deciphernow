@@ -19,6 +19,7 @@ REGISTRATION_TOKEN=${1} &&
         container \
         create \
         --cidfile ${RUNN} \
+        --env DOCKER_HOST=tcp://dind:2376 \
         gitlab/gitlab-runner:v1.11.2 &&
     docker \
         network \

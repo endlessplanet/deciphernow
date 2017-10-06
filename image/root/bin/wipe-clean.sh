@@ -2,7 +2,8 @@
 
 ls -1 ${HOME}/docker/containers | grep "^runner" | while read ${FILE}
 do
-    [ -f ${HOME}/docker/containers/${FILE} ] &&
+    echo ${FILE} &&
+        [ -f ${HOME}/docker/containers/${FILE} ] &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/${FILE}) unregister --name proprietary
 done &&
     ls -1 ${HOME}/docker/containers | while read FILE
