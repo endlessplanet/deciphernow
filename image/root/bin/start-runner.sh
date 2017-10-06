@@ -5,7 +5,7 @@ docker \
     exec \
     --interactive \
     --tty \
-    $(cat ${HOME}/docker/containers/gitlab-runner)
+    $(cat ${HOME}/docker/containers/gitlab-runner) \
         gitlab-runner \
         register \
         --non-interactive \
