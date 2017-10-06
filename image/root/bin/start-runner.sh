@@ -17,5 +17,6 @@ do
             --limit 1 \
             --url https://gitlab.363-283.io/ci \
             --executor docker \
+            --docker-image docker:17.09.0-ce-dind \
             --docker-volumes /var/run/docker.sock:/var/run/docker.sock
 done
