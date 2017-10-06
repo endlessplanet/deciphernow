@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ls -1 ${HOME}/docker/containers | grep "^runner" | while read ${FILE}
+ls -1 ${HOME}/docker/containers | grep "^runner" | while read FILE
 do
     echo docker container exec --interactive --tty $(cat ${HOME}/docker/containers/${FILE}) unregister --name proprietary
 done &&
@@ -12,11 +12,11 @@ done &&
     done &&
     ls -1 ${HOME}/docker/networks | while read FILE
     do
-        sudo docker networks rm $(cat ${HOME}/docker/networks/${FILE}) &&
+        docker networks rm $(cat ${HOME}/docker/networks/${FILE}) &&
             rm -f ${HOME}/docker/networks/${FILE}
     done &&
     ls -1 ${HOME}/docker/volumes | while read FILE
     do
-        sudo docker volume rm $(cat ${HOME}/docker/volumes/${FILE}) &&
+        docker volume rm $(cat ${HOME}/docker/volumes/${FILE}) &&
             rm -f ${HOME}/docker/volumes/${FILE}
     done
