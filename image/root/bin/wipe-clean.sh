@@ -3,7 +3,8 @@
 docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner list > ${HOME}/runners.out.txt 2> ${HOME}/runners.err.txt &&
     tail -n -1 ${HOME}/runners.err.txt | cut -f 1 -d " " | while read RUNNER
     do
-        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner unregister --name ${RUNNER}
+        echo docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner unregister --name ${RUNNER} &&
+            docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner unregister --name ${RUNNER}
     done &&
     ls -1 ${HOME}/docker/containers | while read FILE
     do
