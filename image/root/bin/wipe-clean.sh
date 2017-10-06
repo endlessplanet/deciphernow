@@ -1,6 +1,9 @@
 #!/bin/sh
 
-docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner list > ${HOME}/runners.out.txt 2> ${HOME}/runners.err.txt &&
+(docker container exec --interactive --tty $(cat ${HOME}/docker/containers/gitlab-runner) gitlab-runner list > ${HOME}/runners.out.txt 2> ${HOME}/runners.err.txt || true) &&
+    echo OUTPUT &&
+    cat ${HOME}/runners.out.txt &&
+    echo ERROR &&
     cat ${HOME}/runners.err.txt &&
     tail -n -1 ${HOME}/runners.err.txt | cut -f 1 -d " " | while read RUNNER
     do
