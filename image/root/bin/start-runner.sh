@@ -24,7 +24,7 @@ REGISTRATION_TOKEN=${1} &&
         network \
         connect \
         --alias dind \
-        $(cat {NETW}) \
+        $(cat ${NETW}) \
         $(cat ${DIND}) &&
     docker \
         network \
