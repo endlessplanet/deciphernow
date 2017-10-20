@@ -1,3 +1,3 @@
 #!/bin/sh
 
-export PATH=${HOME}/usr/local/bin:${PATH}
+export PATH=${HOME}/bin:${PATH}

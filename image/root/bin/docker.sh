@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/local/bin/docker/ "${@}"
+/usr/local/bin/docker "${@}"
