@@ -8,5 +8,5 @@ docker \
     --rm \
     --env DISPLAY \
     --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
-    --name decipernow \
+    --name deciphernow \
     endlessplanet/deciphernow:$(git rev-parse HEAD)
