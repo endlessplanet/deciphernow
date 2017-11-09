@@ -15,13 +15,13 @@ dnf update --assumeyes &&
     dnf install --assumeyes sudo &&
     cp /opt/docker/user.sudo /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
-    dnf install --assumeyes meld &&
-    mkdir /workspace &&
-    chown user:user /workspace &&
-    ls -1 /opt/docker/bin | while read FILE
+    mkdir /opt/docker/workspace &&
+    chown user:user /opt/docker/workspace &&
+    mkdir /opt/docker/bin &&
+    ls -1 /opt/docker/src/bin | while read FILE
     do
-        cp /opt/docker/bin/${FILE} /usr/local/bin/${FILE%.*} &&
-            chmod 0555 /usr/local/bin/${FILE%.*}
+        cp /opt/docker/src/bin/${FILE} /opt/docker/bin/${FILE%.*} &&
+            chmod 0555 /opt/docker/bin/${FILE%.*}
     done &&
     dnf update --assumeyes &&
     dnf clean all &&
