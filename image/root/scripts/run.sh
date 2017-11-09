@@ -10,7 +10,7 @@ apk update &&
     ls -1 /opt/docker/src/bin | while read FILE
     do
         cp /opt/docker/src/bin/${FILE} /opt/docker/bin/${FILE%.*} &&
-            chmod 0500 /opt/docker/bin/${FILE%.*}
+            chmod 0555 /opt/docker/bin/${FILE%.*}
     done &&
     ln -sf /home/user/bin/bashrc /home/user/.bashrc &&
     rm -rf /var/cache/apk/*
