@@ -12,5 +12,5 @@ apk update &&
         cp /opt/docker/src/bin/${FILE} /opt/docker/bin/${FILE%.*} &&
             chmod 0555 /opt/docker/bin/${FILE%.*}
     done &&
-    ln -sf /home/user/bin/bashrc /home/user/.bashrc &&
+    ln -sf /opt/docker/bin/bashrc /home/user/.bashrc &&
     rm -rf /var/cache/apk/*
