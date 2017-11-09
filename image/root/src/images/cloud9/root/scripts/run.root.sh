@@ -7,7 +7,7 @@ dnf update --assumeyes &&
     git -C /opt/docker/c9sdk remote add origin git://github.com/c9/core.git &&
     git -C /opt/docker/c9sdk pull origin master &&
     /opt/docker/c9sdk/scripts/install-sdk.sh &&
-    cp /opt/docker/docker.repo /etc/yum.repos.d/ &&
+    cp /opt/docker/etc/docker.repo /etc/yum.repos.d/ &&
     dnf update --assumeyes &&
     dnf install --assumeyes docker-engine &&
     dnf install --assumeyes util-linux-user &&
