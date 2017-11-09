@@ -1,4 +1,4 @@
 #!/bin/sh
 
 cd image &&
-    docker image build --tag endlessplanet/deciphernow:$(git rev-parse HEAD)
+    docker image build --tag endlessplanet/deciphernow:$(git rev-parse HEAD) .
