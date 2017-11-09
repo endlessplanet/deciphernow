@@ -2,7 +2,7 @@
 
 apk update &&
     apk upgrade &&
-    apk add --no-cache sudo bash &&
+    apk add --no-cache sudo bash coreutils &&
     cp /opt/docker/etc/user.sudo.txt /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
     adduser -D user &&
