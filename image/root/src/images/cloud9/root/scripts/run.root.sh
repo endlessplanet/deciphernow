@@ -13,7 +13,7 @@ dnf update --assumeyes &&
     dnf install --assumeyes util-linux-user &&
     adduser user &&
     dnf install --assumeyes sudo &&
-    cp /opt/docker/user.sudo /etc/sudoers.d/user &&
+    cp /opt/docker/etc/user.sudo.txt /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
     mkdir /opt/docker/workspace &&
     chown user:user /opt/docker/workspace &&
