@@ -6,12 +6,11 @@ apk update &&
     cp /opt/docker/etc/user.sudo.txt /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
     adduser -D user &&
-    mkdir /home/user/bin &&
+    mkdir /opt/docker/bin &&
     ls -1 /opt/docker/src/bin | while read FILE
     do
-        cp /opt/docker/src/bin/${FILE} /home/user/bin/${FILE%.*} &&
-            chmod 0500 /home/user/bin/${FILE%.*}
+        cp /opt/docker/src/bin/${FILE} /opt/docker/bin/${FILE%.*} &&
+            chmod 0500 /opt/docker/bin/${FILE%.*}
     done &&
-    chown -R user:user /home/user/bin &&
     ln -sf /home/user/bin/bashrc /home/user/.bashrc &&
     rm -rf /var/cache/apk/*
