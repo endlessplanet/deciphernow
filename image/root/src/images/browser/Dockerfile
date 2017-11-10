@@ -11,4 +11,4 @@ VOLUME /home
 WORKDIR /home/user
 ENTRYPOINT ["chromium-browser"]
 CMD []
-LABEL title="browser"
+LABEL domain="deciphernow" title="browser"

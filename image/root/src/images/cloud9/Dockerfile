@@ -7,3 +7,4 @@ VOLUME /home
 WORKDIR /home/user
 ENTRYPOINT ["sh", "/opt/docker/scripts/entrypoint.sh"]
 CMD []
+LABEL title="cloud9" domain="deciphernow"
