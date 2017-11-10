@@ -6,5 +6,7 @@ sudo \
     run \
     --interactive \
     --tty \
-    --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
-    docker:17.10.0 "${@}"
+    --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+    --env DISPLAY \
+    docker:17.10.0 \
+        "${@}"

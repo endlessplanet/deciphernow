@@ -5,6 +5,7 @@ cd ${HOME} &&
     (cat >> /home/user/.bashrc <<EOF
 GIT_PROMPT_ONLY_IN_REPO=1
 source ~/.bash-git-prompt/gitprompt.sh
+export PATH=/opt/docker/bin:${PATH}
 EOF
     ) && 
     curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | bash
