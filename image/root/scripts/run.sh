@@ -13,4 +13,7 @@ apk update &&
             chmod 0555 /opt/docker/bin/${FILE%.*}
     done &&
     ln -sf /opt/docker/bin/bashrc /home/user/.bashrc &&
+    mkdir /home/user/docker &&
+    mkdir /home/user/docker/containers &&
+    mkdir /home/user/docker/networks &&
     rm -rf /var/cache/apk/*
