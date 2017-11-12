@@ -2,5 +2,5 @@
 
 if [ ! -f ${HOME}/docker/networks/regular ]
 then
-    docker network create $(uuidgen) > ${HOME}/docker/networks/regular
+    docker network create --label expiry=$(date --date "${EXPIRY}" +%s) $(uuidgen) > ${HOME}/docker/networks/regular
 fi

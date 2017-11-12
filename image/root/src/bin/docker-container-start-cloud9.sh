@@ -2,10 +2,12 @@
 
 if [ ! -f ${HOME}/docker/containers/cloud9-${1} ]
 then
+    docker-image-build-cloud9 &&
     docker-container-start-browser &&
         docker \
             container \
             create \
+            --label expiry=$(date --date "${EXPIRY}" +%s) \
             --cidfile ${HOME}/docker/containers/cloud9-${1} \
             --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
             $(cat ${HOME}/docker/images/cloud9) &&
