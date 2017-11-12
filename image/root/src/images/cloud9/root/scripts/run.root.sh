@@ -11,6 +11,7 @@ dnf update --assumeyes &&
     dnf update --assumeyes &&
     dnf install --assumeyes docker-engine &&
     dnf install --assumeyes util-linux-user &&
+    dnf install --assumeyes openssh-clients &&
     adduser user &&
     dnf install --assumeyes sudo &&
     cp /opt/docker/etc/user.sudo.txt /etc/sudoers.d/user &&
