@@ -20,6 +20,6 @@ then
             --interactive \
             --tty \
             --user root \
-            $(cat ${HOME}/docker/containers/cloud9-${1})
+            $(cat ${HOME}/docker/containers/cloud9-${1}) \
                 $(docker container exec --interactive --tty $(cat ${HOME}/docker/containers/sshd) sh /opt/docker/src/bin/reserve.sh)
 fi
