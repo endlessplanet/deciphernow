@@ -21,5 +21,7 @@ then
             --tty \
             --user root \
             $(cat ${HOME}/docker/containers/cloud9-${1}) \
+                sh \
+                /opt/docker/src/sbin/tunnel.sh \
                 $(docker container exec --interactive --tty $(cat ${HOME}/docker/containers/sshd) sh /opt/docker/src/bin/reserve.sh)
 fi
