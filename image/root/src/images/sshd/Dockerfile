@@ -1,8 +1,5 @@
-FROM fedora:26
-RUN \
-    dnf update --assumeyes && \
-    dnf install --assumeyes openssh-server && \
-    dnf update --assumeyes && \
-    dnf clean all
-ENTRYPOINT ["bash"]
+FROM panubo/sshd
+COPY root /opt/docker
+RUN ["sh", "/opt/docker/scripts/run.sh"]
+ENTRYPOINT ["sh", "/opt/docker/scripts/entrypoint.sh"]
 CMD []
