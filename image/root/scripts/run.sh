@@ -14,6 +14,7 @@ apk update &&
     done &&
     ln -sf /opt/docker/bin/bashrc /home/user/.bashrc &&
     mkdir /home/user/docker &&
+    mkdir /home/user/docker/images &&
     mkdir /home/user/docker/containers &&
     mkdir /home/user/docker/networks &&
     chown -R user:user /home/user/docker &&
