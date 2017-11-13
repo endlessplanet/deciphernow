@@ -5,24 +5,41 @@ then
     docker-image-build-cloud9 &&
     docker-container-start-sshd &&
     docker-container-start-browser &&
-        docker \
-            container \
-            create \
-            --label expiry=$(date --date "${EXPIRY}" +%s) \
-            --cidfile ${HOME}/docker/containers/cloud9-${1} \
-            --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
-            $(cat ${HOME}/docker/images/cloud9) &&
-        docker network connect --alias "${1}" $(cat ${HOME}/docker/networks/regular) $(cat ${HOME}/docker/containers/cloud9-${@}) &&
-        docker container start $(cat ${HOME}/docker/containers/cloud9-${1}) &&
-        docker \
-            container \
-            exec \
-            --interactive \
-            --tty \
-            --user root \
-            $(cat ${HOME}/docker/containers/cloud9-${1}) \
-                sh \
-                /opt/docker/src/sbin/tunnel.sh \
-                /opt/docker/src/sbin/tunnel.sh \
-                $(docker container exec --interactive --tty $(cat ${HOME}/docker/containers/sshd) sh /opt/docker/src/bin/reserve.sh)
+    docker \
+        container \
+        create \
+        --label expiry=$(date --date "${EXPIRY}" +%s) \
+        --cidfile ${HOME}/docker/containers/cloud9-${1} \
+        --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
+        $(cat ${HOME}/docker/images/cloud9) &&
+    docker network connect --alias "${1}" $(cat ${HOME}/docker/networks/regular) $(cat ${HOME}/docker/containers/cloud9-${@}) &&
+    docker container start $(cat ${HOME}/docker/containers/cloud9-${1}) &&
+    ID_RSA_PUB=$(docker \
+        container \
+        exec \
+        --interactive \
+        --tty \
+        $(cat ${HOME}/docker/containers/cloud9-${1}) \
+            sh \
+            /opt/docker/src/sbin/tunnel-init.sh
+    ) &&
+    PORT=(docker \
+        container \
+        exec \
+        --interactive \
+        --tty \
+        $(cat ${HOME}/docker/containers/sshd) \
+            sh \
+            /opt/docker/src/sbin/reserve.sh "${ID_RSA_PUB}"
+    ) &&
+    docker \
+        container \
+        exec \
+        --interactive \
+        --tty \
+        --user root \
+        $(cat ${HOME}/docker/containers/cloud9-${1}) \
+            sh \
+            /opt/docker/src/sbin/tunnel-complete.sh \
+            "${PORT}"
 fi
