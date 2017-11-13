@@ -32,7 +32,7 @@ then
         $(cat ${HOME}/docker/containers/sshd) \
             sh \
             /opt/docker/src/sbin/reserve.sh \
-            "${ID_RSA_PUB}") &&
+            "${ID_RSA_PUB}" | head -n 1) &&
     echo PORT=${PORT} &&
     sleep 10s &&
     docker \
