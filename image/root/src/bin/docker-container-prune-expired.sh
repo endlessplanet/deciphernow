@@ -2,6 +2,6 @@
 
 docker container ls --quiet --filter label=expiry | while read CONTAINER
 do
-    [ $(date +%s) -gt $(docker container inspect --format "{{index .Config.Labels expiry}}" ${CONTAINER}) ] &&
+    [ $(date +%s) -gt $(docker container inspect --format "{{index .Config.Labels \"expiry\"}}" ${CONTAINER}) ] &&
         docker container rm --volumes ${CONTAINER}
 done
