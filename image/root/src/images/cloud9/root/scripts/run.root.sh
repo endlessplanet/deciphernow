@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dnf update --assumeyes &&
+# dnf update --assumeyes &&
     dnf install --assumeyes git make python tar which bzip2 ncurses gmp-devel mpfr-devel libmpc-devel glibc-devel flex bison glibc-static zlib-devel gcc gcc-c++ nodejs &&
     mkdir /opt/docker/c9sdk &&
     git -C /opt/docker/c9sdk init &&
