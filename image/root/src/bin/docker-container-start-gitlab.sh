@@ -38,8 +38,6 @@ then
     docker \
         container \
         exec \
-        --interactive \
-        --tty \
         --detach \
         --user root \
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
@@ -49,8 +47,6 @@ then
     docker \
         container \
         exec \
-        --interactive \
-        --tty \
         --detach \
         --user root \
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
