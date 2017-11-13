@@ -22,7 +22,7 @@ then
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
             sh \
             /opt/docker/src/sbin/tunnel-init.sh) &&
-    PORT=(docker \
+    PORT=$(docker \
         container \
         exec \
         --interactive \
