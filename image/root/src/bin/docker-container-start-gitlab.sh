@@ -8,7 +8,7 @@ do
                 shift 2
         ;;
         --project-name)
-            PROJECT_NAME=${2} &&
+            export PROJECT_NAME=${2} &&
                 shift 2
         ;;
     esac
@@ -24,6 +24,7 @@ done &&
             --label expiry=$(date --date "${EXPIRY}" +%s) \
             --cidfile ${HOME}/docker/containers/cloud9-${PROJECT_NAME} \
             --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
+            --env PROJECT_NAME \
             $(cat ${HOME}/docker/images/cloud9) &&
         docker network connect --alias "${PROJECT_NAME}" $(cat ${HOME}/docker/networks/regular) $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
         docker container start $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
