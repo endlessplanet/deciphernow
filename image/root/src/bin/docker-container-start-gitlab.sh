@@ -21,8 +21,7 @@ then
         --tty \
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
             sh \
-            /opt/docker/src/sbin/tunnel-init.sh
-    ) &&
+            /opt/docker/src/sbin/tunnel-init.sh) &&
     PORT=(docker \
         container \
         exec \
@@ -30,8 +29,7 @@ then
         --tty \
         $(cat ${HOME}/docker/containers/sshd) \
             sh \
-            /opt/docker/src/sbin/reserve.sh "${ID_RSA_PUB}"
-    ) &&
+            /opt/docker/src/sbin/reserve.sh "${ID_RSA_PUB}") &&
     docker \
         container \
         exec \
