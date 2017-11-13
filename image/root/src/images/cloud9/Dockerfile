@@ -1,4 +1,4 @@
-FROM fedora:26
+FROM fedora:25
 COPY root /opt/docker/
 RUN ["sh", "/opt/docker/scripts/run.root.sh"]
 USER user
