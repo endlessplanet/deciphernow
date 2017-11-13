@@ -39,7 +39,7 @@ then
         exec \
         --interactive \
         --tty \
-        --detach
+        --detach \
         --user root \
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
             sh \
@@ -50,7 +50,7 @@ then
         exec \
         --interactive \
         --tty \
-        --detach
+        --detach \
         --user root \
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
             sh \
