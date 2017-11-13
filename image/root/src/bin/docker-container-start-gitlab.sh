@@ -19,6 +19,7 @@ then
         exec \
         --interactive \
         --tty \
+        --user root \
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
             sh \
             /opt/docker/src/sbin/tunnel-init.sh) &&
