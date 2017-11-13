@@ -23,6 +23,7 @@ then
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
             sh \
             /opt/docker/src/sbin/tunnel-init.sh) &&
+    echo ID_RSA_PUB=${ID_RSA_PUB} &&
     PORT=$(docker \
         container \
         exec \
@@ -31,6 +32,7 @@ then
         $(cat ${HOME}/docker/containers/sshd) \
             sh \
             /opt/docker/src/sbin/reserve.sh "${ID_RSA_PUB}") &&
+    echo PORT=${PORT} &&
     docker \
         container \
         exec \
