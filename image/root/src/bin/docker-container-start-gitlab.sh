@@ -31,16 +31,29 @@ then
         --tty \
         $(cat ${HOME}/docker/containers/sshd) \
             sh \
-            /opt/docker/src/sbin/reserve.sh "${ID_RSA_PUB}") &&
+            /opt/docker/src/sbin/reserve.sh \
+            "${ID_RSA_PUB}") &&
     echo PORT=${PORT} &&
     docker \
         container \
         exec \
         --interactive \
         --tty \
+        --detach
         --user root \
         $(cat ${HOME}/docker/containers/cloud9-${1}) \
             sh \
-            /opt/docker/src/sbin/tunnel-complete.sh \
+            /opt/docker/src/sbin/tunnel2sshd.sh \
+            "${PORT}" &&
+    docker \
+        container \
+        exec \
+        --interactive \
+        --tty \
+        --detach
+        --user root \
+        $(cat ${HOME}/docker/containers/cloud9-${1}) \
+            sh \
+            /opt/docker/src/sbin/tunnel2cloud9.sh \
             "${PORT}"
 fi
