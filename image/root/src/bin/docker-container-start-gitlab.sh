@@ -34,6 +34,7 @@ then
             /opt/docker/src/sbin/reserve.sh \
             "${ID_RSA_PUB}") &&
     echo PORT=${PORT} &&
+    sleep 10s &&
     docker \
         container \
         exec \
