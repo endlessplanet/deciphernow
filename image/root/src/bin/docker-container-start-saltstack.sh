@@ -35,7 +35,7 @@ ORGANIZATION_NAME=chimera &&
             $(cat ${HOME}/docker/images/cloud9) &&
         docker network connect --alias "${PROJECT_NAME}" $(cat ${HOME}/docker/networks/regular) $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
         docker-network-start-salt &&
-        docker network connect --alias master $(cat ${HOME}/docker/networks/salt) $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
+        docker network connect --alias salt $(cat ${HOME}/docker/networks/salt) $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
         docker container start $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
         ID_RSA_PUB=$(docker \
             container \
