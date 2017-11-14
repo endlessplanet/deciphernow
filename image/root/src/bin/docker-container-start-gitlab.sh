@@ -66,6 +66,8 @@ done &&
                 sh \
                 /opt/docker/src/sbin/tunnel2cloud9.sh \
                 "${PORT}" &&
+        ssh-keyscan -p 2252 gitlab.363-283.io | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) tee /home/user/.ssh/known_hosts &&
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) chmod 0644 /home/user/.ssh/known_hosts &&
         echo "${UPSTREAM_ID_RSA}" | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) tee /home/user/.ssh/upstream_id_rsa &&
         echo "${ORIGIN_ID_RSA}" | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) tee /home/user/.ssh/origin_id_rsa &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) mkdir /opt/docker/workspace/${PROJECT_NAME}/repo &&
