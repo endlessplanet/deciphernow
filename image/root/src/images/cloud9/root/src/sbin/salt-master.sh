@@ -6,8 +6,6 @@ yum update --assumeyes &&
     yum install --assumeyes salt-master &&
     ln --symbolic --force /workspace/saltstack/repo/srv/salt /srv/salt &&
     ln --symbolic --force /workspace/saltstack/repo/srv/pillar /srv/pillar &&
-    mkdir /workspace &&
-    chown user:user /workspace &&
     cat /opt/docker/etc/master.txt >> /etc/salt/master &&
     yum update --assumeyes &&
     yum clean all &&
