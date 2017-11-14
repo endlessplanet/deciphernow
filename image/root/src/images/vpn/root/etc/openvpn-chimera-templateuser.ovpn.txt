@@ -1,0 +1,53 @@
+dev tun
+client
+proto udp
+<ca>
+-----BEGIN CERTIFICATE-----
+MIIDNTCCAh2gAwIBAgIJAJAk42ukBC6tMA0GCSqGSIb3DQEBCwUAMBYxFDASBgNV
+BAMTC09wZW5MREFQIENBMB4XDTE1MDUyNTE0MDM0NFoXDTI1MDUyMjE0MDM0NFow
+FjEUMBIGA1UEAxMLT3BlbkxEQVAgQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw
+ggEKAoIBAQC+3X7QyiWPAogNahJIZHuVUxx6Rj7bQ43RAxGagcO0QRGV/lA9xzOk
++ScwU16+8nioSJ54N6DcOy70ldiafnPAwWto8dVhteQbOcHFyBear7qJRgGOLzbd
+G5HyoBy7oBlHh3yHQq7dl31YlWAYdYmyT+/PBHU2DUqOLI3Ko+d/Lt4p5Q+u3XCG
+kc+H3noTt7d6C55s65J0XG2V6l3eH8iXm3IpbssGsHPtudPJ1H0GNimmLVRq4EDp
+ceW2LBc9IgcOJ4A+/ElKHOjKR+vvOpNZupydo0hjlD6QHyqCyymqjyazX4agMms0
+xMsSPKZzEyWsKMXLg7kj8AUI3RiMkj+HAgMBAAGjgYUwgYIwHQYDVR0OBBYEFEkr
+9SZ4YxTE9P+MvsmhOL8HYStqMEYGA1UdIwQ/MD2AFEkr9SZ4YxTE9P+MvsmhOL8H
+YStqoRqkGDAWMRQwEgYDVQQDEwtPcGVuTERBUCBDQYIJAJAk42ukBC6tMAwGA1Ud
+EwQFMAMBAf8wCwYDVR0PBAQDAgEGMA0GCSqGSIb3DQEBCwUAA4IBAQBQZYksLyQ4
+1CX0GtDDZ/+98C8VySDJ8XG+l0DvnZLSKONcf5DgA7+Z3AVgxfT5BihtfvF/PVMo
+hGDF/fcBcYaCqaqX2sIEreWwCO5HGUls0X1xar8uCaNAxYVmTzGZXzfJr9XMsxm3
+9upucPHtnlVqg5lpssvx9/dP9kTNaFa3I2p5IPSc9QjphHKyCuCZhAA8ImA4WDdx
+eihfRvtcFnv3flMTLCRvAQqTS96d2HrXsH7ui8EfNz+HOii/qmp88laGAwMVHgxi
+IYN+4vxk7MJuL7ziuVkUY44Oj1F4sHUpi0z0Kz0GNKRimPtIGxdvRokhtCP0ITDO
+OdYVdbvs9tYm
+-----END CERTIFICATE-----
+</ca>
+<cert>
+
+Insert the user cert here
+
+</cert>
+<key>
+
+Insert the user private key here
+
+</key>
+;remote-cert-eku "TLS Web Server Authentication"
+remote chimeravpn.363-283.io 2294
+persist-key
+persist-tun
+verb 3
+mute 20
+keepalive 60 3600
+cipher AES-256-CBC
+auth SHA1
+float
+reneg-sec 216000
+nobind
+comp-lzo
+mute-replay-warnings
+auth-user-pass up
+;auth-nocache
+;remember_connection 0
+;auto_reconnect 1
