@@ -66,8 +66,12 @@ done &&
                 sh \
                 /opt/docker/src/sbin/tunnel2cloud9.sh \
                 "${PORT}" &&
+        echo "${UPSTREAM_ID_RSA}" | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9=${PROJECT_NAME}) tee /home/user/.ssh/upstream_id_rsa &&
+        echo "${ORIGIN_ID_RSA}" | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9=${PROJECT_NAME}) tee /home/user/.ssh/origin_id_rsa &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) mkdir /opt/docker/workspace/${PROJECT_NAME}/repo &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo init &&
-        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo config user.name ${USER_NAME} &&
-        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo config user.email ${USER_EMAIL}
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo config user.name "${LDAP_USERNAME}" &&
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo config user.email "${LDAP_EMAIL}" &&
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo remote add ssh://upstream upstream/${ORGANIZATION_NAME}/${PROJECT_NAME}.git &&
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo remote add ssh://upstream upstream/${LDAP_USERNAME}/${PROJECT_NAME}.git
     fi

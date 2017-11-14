@@ -8,4 +8,8 @@ source ~/.bash-git-prompt/gitprompt.sh
 export PATH=/opt/docker/bin:${PATH}
 EOF
     ) && 
-    curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | bash
+    curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | bash &&
+    mkdir .ssh &&
+    chmod 0700 .ssh &&
+    cp /opt/docker/etc/ssh_config .ssh/config &&
+    chmod 0600 .ssh/config
