@@ -88,6 +88,8 @@ ORGANIZATION_NAME=chimera &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo remote set-url --push upstream no_push &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo remote add origin ssh://origin/${LDAP_USERNAME}/${PROJECT_NAME}.git &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) ln -sf /opt/docker/bin/post-commit /opt/docker/workspace/${PROJECT_NAME}/repo/.git/hooks &&
+        # this is an idea but we should not pull the trigger until we have a health check
+        # docker container exec --interactive --tty --user root $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) sh /opt/docker/src/sbin/salt-master.sh &&
         # export PATH=${PATH}:/opt/docker/bin &&
         # docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo scratch
         true
