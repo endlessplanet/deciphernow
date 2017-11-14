@@ -90,7 +90,8 @@ ORGANIZATION_NAME=chimera &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) ln -sf /opt/docker/bin/post-commit /opt/docker/workspace/${PROJECT_NAME}/repo/.git/hooks &&
         # this is an idea but we should not pull the trigger until we have a health check
         # docker container exec --interactive --tty --user root $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) sh /opt/docker/src/sbin/salt-master.sh &&
-        # export PATH=${PATH}:/opt/docker/bin &&
-        # docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo scratch
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo fetch upstream ${MASTER_BRANCH} &&
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo checkout upstream/${MASTER_BRANCH} &&
+        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo checkout -b scratch/$(uuidgen) &&
         true
     fi
