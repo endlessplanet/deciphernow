@@ -7,5 +7,5 @@ apk update &&
     echo $((${RANDOM}%10000+20000)) > /var/opt/docker/sshd.counter &&
     touch /root/.ssh/authorized_keys &&
     chmod 0600 /root/.ssh/authorized_keys &&
-    adduser --disabled-password --gecos "" user &&
+    adduser -D user &&
     rm -rf /var/cache/apk/*
