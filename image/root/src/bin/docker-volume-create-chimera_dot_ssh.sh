@@ -9,7 +9,7 @@ then
         echo "${CHIMERA_ID_RSA}" | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/chimera_dot_ssh),destination=/home --workdir /home alpine:3.4 tee user/.ssh/id_rsa &&
         (cat <<EOF
 HostName chm-bastion
-HostName 54.173.144.101
+Host 54.173.144.101
 Port 2233
 User ${LDAP_USERNAME}
 IdentityFile ~/.ssh/id_rsa
