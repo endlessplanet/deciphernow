@@ -13,6 +13,13 @@ HostName 54.173.144.101
 Port 2233
 User ${LDAP_USERNAME}
 IdentityFile ~/.ssh/id_rsa
+LocalForward 0.0.0.0:8022 chm-notification01:22
+
+Host chm-notification01
+HostName 127.0.0.1
+Port 8022
+User ${LDAP_USERNAME}
+IdentityFile ~/.ssh/id_rsa
 LocalForward 0.0.0.0:8080 s3.amazonaws.com:80
 LocalForward 0.0.0.0:8443  s3.amazonaws.com:443
 EOF
