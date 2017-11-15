@@ -11,7 +11,7 @@ then
 HostName chm-bastion
 HostName 54.173.144.101
 Port 2233
-User emory.merryman
+User ${LDAP_USERNAME}
 IdentityFile ~/.ssh/id_rsa
 ControlMaster auto
 ControlPath ~/.ssh/chm-ctrl_path-%H-%P-%R
