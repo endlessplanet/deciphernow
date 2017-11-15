@@ -17,5 +17,6 @@ apk update &&
     mkdir /home/user/docker/images &&
     mkdir /home/user/docker/containers &&
     mkdir /home/user/docker/networks &&
+    mkdir /home/user/docker/volumes &&
     chown -R user:user /home/user/docker &&
     rm -rf /var/cache/apk/*
