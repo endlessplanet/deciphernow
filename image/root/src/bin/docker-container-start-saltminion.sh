@@ -18,7 +18,7 @@ do
     esac
 done &&
     docker-container-create-saltmaster &&
-    sleep 30s &&
+    sleep 15s &&
     if [ ! -f ${HOME}/docker/containers/cloud9-${PROJECT_NAME} ]
     then
         docker-image-build-cloud9 &&

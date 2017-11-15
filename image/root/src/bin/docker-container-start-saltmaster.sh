@@ -93,6 +93,6 @@ ORGANIZATION_NAME=chimera &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo fetch upstream ${MASTER_BRANCH} &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo checkout upstream/${MASTER_BRANCH} &&
         docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo checkout -b scratch/$(uuidgen) &&
-        docker container exec --interactive --tty --user root $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo sh /opt/docker/src/sbin/salt-master.sh &&
+        docker container exec --interactive --tty --user root $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) sh /opt/docker/src/sbin/salt-master.sh &&
         true
     fi
