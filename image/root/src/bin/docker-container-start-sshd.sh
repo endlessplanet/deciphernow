@@ -2,7 +2,7 @@
 
 if [ ! -f ${HOME}/docker/containers/sshd ]
 then
-    docker-volume-create-chimera_dot_ssh.sh &&
+    docker-volume-create-chimera_dot_ssh &&
     docker-image-build-sshd &&
         docker \
             container \
