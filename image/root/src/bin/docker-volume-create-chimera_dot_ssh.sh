@@ -14,7 +14,7 @@ Port 2233
 User ${LDAP_USERNAME}
 IdentityFile ~/.ssh/id_rsa
 ControlMaster auto
-ControlPath ~/.ssh/chm-ctrl_path-%H-%P-%R
+ControlPath ~/.ssh/chm-ctrl_path-%h-%p-%r
 LocalForward 0.0.0.0:8080 s3.amazonaws.com:80
 LocalForward 0.0.0.0:8443  s3.amazonaws.com:443
 EOF
