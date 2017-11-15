@@ -17,6 +17,8 @@ do
         ;;
     esac
 done &&
+    docker-container-create-saltmaster &&
+    sleep 30s &&
     if [ ! -f ${HOME}/docker/containers/cloud9-${PROJECT_NAME} ]
     then
         docker-image-build-cloud9 &&
@@ -32,7 +34,7 @@ done &&
             --env "MASTER_BRANCH=${MASTER_BRANCH}" \
             $(cat ${HOME}/docker/images/cloud9) &&
         docker network connect --alias "${PROJECT_NAME}" $(cat ${HOME}/docker/networks/regular) $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
-        docker-network-start-salt &&
+        docker-network-start-saltmaster &&
         docker network connect $(cat ${HOME}/docker/networks/salt) $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
         docker container start $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) &&
         ID_RSA_PUB=$(docker \
@@ -72,5 +74,8 @@ done &&
             $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) \
                 sh \
                 /opt/docker/src/sbin/tunnel2cloud9.sh \
-                "${PORT}"
+                "${PORT}" &&
+        docker container exec --interactive --tty --user root $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) git -C /opt/docker/workspace/${PROJECT_NAME}/repo sh /opt/docker/src/sbin/salt-minion.sh ${PROJECT_NAME} &&
+        sleep 10s &&
+        docker container exec --interactive --tty --user root $(cat ${HOME}/docker/containers/cloud9-saltstack) git -C /opt/docker/workspace/${PROJECT_NAME}/repo salt-key --accept-all --yes ${PROJECT_NAME}
     fi
