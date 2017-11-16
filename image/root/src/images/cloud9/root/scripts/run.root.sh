@@ -25,6 +25,7 @@ dnf update --assumeyes &&
         cp /opt/docker/src/bin/${FILE} /opt/docker/bin/${FILE%.*} &&
             chmod 0555 /opt/docker/bin/${FILE%.*}
     done &&
+    cp /opt/docker/etc/chimera.repo /etc/yum.repos.d &&
     dnf update --assumeyes &&
     dnf clean all &&
     true

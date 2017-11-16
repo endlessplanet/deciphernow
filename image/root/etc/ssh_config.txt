@@ -2,13 +2,13 @@ Host upstream.gitlab
 HostName gitlab.363-283.io
 User git
 Port 2252
-IdentityFile ~/.ssh/upstream_gitlab_id_rsa
+IdentityFile ~/.ssh/gitlab_upstream_id_rsa
 
 Host origin.gitlab
 HostName gitlab.363-283.io
 User git
 Port 2252
-IdentityFile ~/.ssh/origin_gitlab_id_rsa
+IdentityFile ~/.ssh/gitlab_origin_id_rsa
 
 Host chm-bastion
 HostName 54.173.144.101
