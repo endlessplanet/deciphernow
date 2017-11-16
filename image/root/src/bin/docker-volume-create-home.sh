@@ -12,9 +12,13 @@ then
         sed -e "s#\${LDAP_USERNAME}#${LDAP_USERNAME}#" /opt/docker/etc/ssh_config.txt | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 tee user/.ssh/config &&
         docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chmod 0600 user/.ssh/config user/.ssh/gitlab_upstream_id_rsa user/.ssh/gitlab_origin_id_rsa user/.ssh/chimera_id_rsa &&
         ssh-keyscan -p 2252 gitlab.363-283.io | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 tee user/.ssh/known_hosts &&
-        ssh-keyscan -p 2233 54.173.144.101 | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 tee user/.ssh/known_hosts &&
+        ssh-keyscan github.com | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 tee --apend user/.ssh/known_hosts &&
+        ssh-keyscan -p 2233 54.173.144.101 | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 tee --append user/.ssh/known_hosts &&
         docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chmod 0644 user/.ssh/known_hosts &&
         docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chown -R 1000:1000 user &&
         docker-image-build-cloud9 &&
-        curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --env PROJECT_NAME=garbage --entrypoint bash $(cat ${HOME}/docker/images/cloud9)
+        curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --env PROJECT_NAME=garbage --entrypoint bash $(cat ${HOME}/docker/images/cloud9) &&
+        docker container run --interactive --tty  --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --entrypoint git --workdir /home/user $(cat $HOME}/docker/images/cloud9) clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt --depth=1 &&
+        cat /opt/docker/etc/bash_config.txt | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home/user alpine:3.4 tee --append .bashrc &&
+        true
 fi
