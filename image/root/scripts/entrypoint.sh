@@ -1,4 +1,4 @@
 #!/bin/sh
 
-trap /opt/docker/bin/docker-container-prune-expired EXIT &&
+trap /opt/docker/bin/cleanup EXIT &&
     bash
