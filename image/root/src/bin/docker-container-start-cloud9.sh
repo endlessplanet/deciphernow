@@ -13,6 +13,7 @@ done &&
     then
         docker-image-build-cloud9 &&
         docker-container-start-sshd &&
+        docker-volume-create-home.sh &&
         docker-container-start-browser &&
         docker \
             container \
@@ -20,6 +21,7 @@ done &&
             --label expiry=$(date --date "${EXPIRY}" +%s) \
             --cidfile ${HOME}/docker/containers/cloud9-${PROJECT_NAME} \
             --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
+            --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home \
             --env "PROJECT_NAME=${PROJECT_NAME}" \
             --env "MASTER_BRANCH=${MASTER_BRANCH}" \
             $(cat ${HOME}/docker/images/cloud9) &&
@@ -62,10 +64,5 @@ done &&
             $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) \
                 sh \
                 /opt/docker/src/sbin/tunnel2cloud9.sh \
-                "${PORT}" &&
-        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) ssh-keyscan -p 2252 gitlab.363-283.io | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) tee /home/user/.ssh/known_hosts &&
-        docker container exec --interactive --tty $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) chmod 0644 /home/user/.ssh/known_hosts &&
-        echo "${UPSTREAM_ID_RSA}" | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) tee /home/user/.ssh/upstream_id_rsa &&
-        echo "${ORIGIN_ID_RSA}" | docker container exec --interactive $(cat ${HOME}/docker/containers/cloud9-${PROJECT_NAME}) tee /home/user/.ssh/origin_id_rsa &&
-        true
+                "${PORT}"
     fi
