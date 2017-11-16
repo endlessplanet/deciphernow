@@ -13,7 +13,7 @@ done &&
     then
         docker-image-build-cloud9 &&
         docker-container-start-sshd &&
-        docker-volume-create-home.sh &&
+        docker-volume-create-home &&
         docker-container-start-browser &&
         docker \
             container \
