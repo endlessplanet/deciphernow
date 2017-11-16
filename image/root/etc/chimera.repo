@@ -1,0 +1,6 @@
+[chimera-yum-s3-repo]
+name=Chimera Services Yum Repo
+baseurl=https://s3.amazonaws.com/chimera-yum-repo/redhat/6/x86_64
+enabled=1
+gpgcheck=0
+sslverify=F
