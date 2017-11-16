@@ -3,14 +3,6 @@
 while [ ${#} -gt 0 ]
 do
     case ${1} in
-        --master-branch)
-            export MASTER_BRANCH="${2}" &&
-                shift 2
-        ;;
-        --organization-name)
-            ORGANIZATION_NAME="${2}" &&
-                shift 2
-        ;;
         --project-name)
             export PROJECT_NAME="${2}" &&
                 shift 2

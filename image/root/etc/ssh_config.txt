@@ -1,0 +1,64 @@
+Host upstream.gitlab
+HostName gitlab.363-283.io
+User git
+Port 2252
+
+Host origin.gitlab
+HostName gitlab.363-283.io
+User git
+Port 2252
+
+Host chm-bastion
+HostName 54.173.144.101
+Port 2233
+User ${LDAP_USERNAME}
+IdentityFile ~/.ssh/chimera_id_rsa
+ControlMaster auto
+ControlPath ~/.ssh/ctrl-path-%h-%p-%r
+LocalForward 127.0.0.1:28153 s3.amazonaws.com:80
+LocalForward 127.0.0.1:28154  s3.amazonaws.com:443
+LocalForward 127.0.0.1:28155 chm-salt-master:22
+LocalForward 127.0.0.1:28156 chm-notification01:22
+LocalForward 127.0.0.1:28157 chm-notification02:22
+LocalForward 127.0.0.1:28158 chm-nginx01:22
+LocalForward 127.0.0.1:28159 chm-live01:22
+
+Host chm-salt-master
+HostName 127.0.0.1
+User ${LDAP_USERNAME}
+IdentityFile ~/.ssh/chimera_id_rsa
+ControlMaster auto
+ControlPath ~/.ssh/ctrl-path-%h-%p-%r
+Port 28153
+
+Host chm-notification01
+HostName 127.0.0.1
+User ${LDAP_USERNAME}
+IdentityFile ~/.ssh/chimera_id_rsa
+ControlMaster auto
+ControlPath ~/.ssh/ctrl-path-%h-%p-%r
+Port 28156
+
+Host chm-notification02
+HostName 127.0.0.1
+User ${LDAP_USERNAME}
+IdentityFile ~/.ssh/chimera_id_rsa
+ControlMaster auto
+ControlPath ~/.ssh/ctrl-path-%h-%p-%r
+Port 28157
+
+Host chm-nginx01
+HostName 127.0.0.1
+User ${LDAP_USERNAME}
+IdentityFile ~/.ssh/chimera_id_rsa
+ControlMaster auto
+ControlPath ~/.ssh/ctrl-path-%h-%p-%r
+Port 28158
+
+Host chm-live01
+HostName 127.0.0.1
+User ${LDAP_USERNAME}
+IdentityFile ~/.ssh/chimera_id_rsa
+ControlMaster auto
+ControlPath ~/.ssh/ctrl-path-%h-%p-%r
+Port 28159
