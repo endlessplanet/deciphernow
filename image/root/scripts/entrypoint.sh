@@ -1,4 +1,4 @@
 #!/bin/sh
 
-trap docker-system-prune-expired EXIT &&
+trap /opt/docker/bin/docker-system-prune-expired EXIT &&
     bash
