@@ -19,7 +19,7 @@ done &&
             container \
             create \
             --label expiry=$(date --date "${EXPIRY}" +%s) \
-            --cidfile ${HOME}/docker/containers/cloud9-${HOST_NAmE} \
+            --cidfile ${HOME}/docker/containers/cloud9-${HOST_NAME} \
             --mount type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock,readonly=true \
             --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home \
             --env "HOST_NAME=${HOST_NAME}" \
