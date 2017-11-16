@@ -2,7 +2,7 @@ FROM urgemerge/chromium-pulseaudio@sha256:21d8120ff7857afb0c18d4abf098549de16978
 RUN \
     apt-get update --assume-yes && \
     apt-get install --assume-yes sudo && \
-    adduser --disabled-password --gecos "" user && \
+    adduser --disabled-password --gecos "" user -G audio chromium && \
     apt-get update --assume-yes && \
     apt-get clean all
 USER user
