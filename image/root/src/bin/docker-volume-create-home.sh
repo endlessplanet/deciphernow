@@ -16,5 +16,5 @@ then
         docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chmod 0644 user/.ssh/known_hosts &&
         docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chown -R 1000:1000 user &&
         docker-image-build-cloud9 &&
-        curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home $(cat ${HOME}/docker/images/cloud9) alpine:3.4 sh
+        curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --env PROJECT_NAME=garbage $(cat ${HOME}/docker/images/cloud9) alpine:3.4 sh
 fi
