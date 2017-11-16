@@ -3,4 +3,4 @@ name=Chimera Services Yum Repo
 baseurl=https://127.0.0.1:28154/chimera-yum-repo/redhat/6/x86_64
 enabled=1
 gpgcheck=0
-sslverify=F
+sslverify=False
