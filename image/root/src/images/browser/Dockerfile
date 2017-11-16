@@ -4,7 +4,7 @@ RUN \
     apt-get install --assume-yes sudo && \
     adduser --disabled-password --gecos "" user && \
     echo "user ALL=(ALL) NOPASSWD: /entrypoint.sh" > /etc/sudoers.d/user && \
-    chmod 0444 /etc/sudoers.d/user &&
+    chmod 0444 /etc/sudoers.d/user && \
     apt-get update --assume-yes && \
     apt-get clean all
 USER user
