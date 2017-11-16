@@ -19,6 +19,6 @@ then
         docker-image-build-cloud9 &&
         curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --env PROJECT_NAME=garbage --entrypoint bash $(cat ${HOME}/docker/images/cloud9) &&
         docker container run --interactive --tty  --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --entrypoint git --workdir /home/user $(cat ${HOME}/docker/images/cloud9) clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt --depth=1 &&
-        cat /opt/docker/etc/bash_config.txt | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home/user alpine:3.4 tee --append .bashrc &&
+        cat /opt/docker/etc/bash_config.txt | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home/user alpine:3.4 tee -a .bashrc &&
         true
 fi
