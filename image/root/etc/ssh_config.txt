@@ -10,6 +10,16 @@ User git
 Port 2252
 IdentityFile ~/.ssh/gitlab_origin_id_rsa
 
+Host upstream.github
+HostName github.com
+User git
+IdentityFile ~/.ssh/github_upstream_id_rsa
+
+Host origin.github
+HostName github.com
+User git
+IdentityFile ~/.ssh/github_origin_id_rsa
+
 Host chm-bastion
 HostName 54.173.144.101
 Port 2233

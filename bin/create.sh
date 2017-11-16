@@ -10,8 +10,8 @@ docker \
     --env EXPIRY="now + 1 hour" \
     --env-file public.env \
     --env CHIMERA_ID_RSA="$(cat private/chimera_id_rsa)" \
-    --env UPSTREAM_ID_RSA="$(cat private/upstream_id_rsa)" \
-    --env ORIGIN_ID_RSA="$(cat private/origin_id_rsa)" \
+    --env UPSTREAM_ID_RSA="$(cat private/upstream_gitlab_id_rsa)" \
+    --env ORIGIN_ID_RSA="$(cat private/origin_gitlab_id_rsa)" \
     --env UPSTREAM_GITHUB_ID_RSA="$(cat private/upstream_github_id_rsa)" \
     --env ORIGIN_GITHUB_ID_RSA="$(cat private/upstream_github_id_rsa)" \
     --env MASTER_BRANCH=develop \
