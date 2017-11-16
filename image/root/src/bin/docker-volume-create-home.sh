@@ -14,5 +14,7 @@ then
         ssh-keyscan -p 2252 gitlab.363-283.io | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 tee user/.ssh/known_hosts &&
         ssh-keyscan -p 2233 54.173.144.101 | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 tee user/.ssh/known_hosts &&
         docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chmod 0644 user/.ssh/known_hosts &&
-        docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chown -R 1000:1000 user
+        docker container run --interactive --tty --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home --workdir /home alpine:3.4 chown -R 1000:1000 user &&
+        docker-image-build-cloud9 &&
+        curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | docker container run --interactive --rm --mount type=volume,source=$(cat ${HOME}/docker/volumes/home),destination=/home $(cat ${HOME}/docker/images/cloud9) alpine:3.4 sh
 fi
