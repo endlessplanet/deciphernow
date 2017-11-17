@@ -10,7 +10,7 @@ do
     esac
 done &&
     export HOST_NAME=${MINION_NAME} &&
-    docker-container-create-saltmaster &&
+    docker-container-start-saltmaster &&
     sleep 15s &&
     docker-container-create-cloud9 ${@} &&
     docker network connect --alias "${MINION_NAME}" $(cat ${HOME}/docker/networks/regular) $(cat ${HOME}/docker/containers/cloud9-${MINION_NAME}) &&
