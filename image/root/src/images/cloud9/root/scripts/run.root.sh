@@ -26,6 +26,8 @@ dnf update --assumeyes &&
             chmod 0555 /opt/docker/bin/${FILE%.*}
     done &&
     cp /opt/docker/etc/chimera.repo /etc/yum.repos.d &&
+    dnf install --assumeyes procps-ng curl salt-master &&
+    cat /opt/docker/etc/master.txt >> /etc/salt/master &&
     dnf update --assumeyes &&
     dnf clean all &&
     true
